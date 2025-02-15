@@ -1,10 +1,6 @@
-import React, { useEffect, useCallback, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import TextTransition, { presets } from "react-text-transition";
-import { Particles } from "@tsparticles/react";
-import { loadSlim } from "tsparticles-slim";
-import Aos from "aos";
-import "aos/dist/aos.css";
 
 import bgImage from "../../assets/bg.svg";
 import image from "../../assets/SHAN PIC.jpeg";
@@ -19,21 +15,11 @@ const TITLES = [
 ];
 
 const Home = () => {
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      Aos.init({ duration: 1000 });
-    }
-  }, []);
-
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
     const intervalId = setInterval(() => setIndex((prev) => (prev + 1) % TITLES.length), 2000);
     return () => clearInterval(intervalId);
-  }, []);
-
-  const particlesInit = useCallback(async (engine) => {
-    await loadSlim(engine);
   }, []);
 
   return (
@@ -45,28 +31,37 @@ const Home = () => {
         backgroundSize: "cover",
       }}
     >
-      {/* Apply Particles ONLY Inside Home Page */}
-      <div className="absolute inset-0 z-0">
-        <Particles
-          init={particlesInit}
-          options={{
-            fullScreen: { enable: false },
-            particles: {
-              number: { value: 80 },
-              size: { value: 3 },
-              move: { speed: 1, direction: "none", outModes: "out" },
-              links: { enable: true, opacity: 0.5, distance: 150, color: "#149ddd" },
-              color: { value: "#149ddd" },
-            },
-            interactivity: { events: { onHover: { enable: true, mode: "repulse" } } },
-          }}
-        />
-      </div>
+      {/* Floating Particles Effect using Framer Motion */}
+      <motion.div
+        className="absolute inset-0 z-0"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
+        {[...Array(15)].map((_, i) => (
+          <motion.span
+            key={i}
+            className="absolute w-2 h-2 bg-blue-400 rounded-full opacity-50"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -20, 0],
+              opacity: [0.5, 1, 0.5],
+            }}
+            transition={{
+              duration: Math.random() * 2 + 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
+      </motion.div>
 
       {/* Left Section (Text) */}
       <motion.div
         className="flex flex-col mt-24 z-10"
-        data-aos="fade-up"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
@@ -88,14 +83,34 @@ const Home = () => {
           transition={{ duration: 0.7 }}
         >
           <span className="text-purple-700">I'm </span>
-          <span className="neon-glow">SHAN GABOL</span>
+          <motion.span
+            className="neon-glow"
+            animate={{
+              textShadow: [
+                "0px 0px 5px #fff",
+                "0px 0px 10px #fff",
+                "0px 0px 15px #149ddd",
+                "0px 0px 20px #149ddd",
+                "0px 0px 15px #149ddd",
+                "0px 0px 10px #fff",
+                "0px 0px 5px #fff",
+              ],
+            }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          >
+            SHAN GABOL
+          </motion.span>
         </motion.p>
 
-        {/* Smooth Title Animation (Fixed <div> inside <p> issue) */}
+        {/* Smooth Title Animation */}
         <p className="text-2xl font-bold mt-3 text-white">
-          <span>
+          <motion.span
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
             <TextTransition springConfig={presets.wobbly}>{TITLES[index]}</TextTransition>
-          </span>
+          </motion.span>
         </p>
       </motion.div>
 
@@ -105,8 +120,13 @@ const Home = () => {
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 1.2 }}
+        whileHover={{ scale: 1.05 }}
       >
-        <img src={image} alt="Profile" className="rounded-full shadow-lg w-60 h-60 object-cover" />
+        <img
+          src={image}
+          alt="Profile"
+          className="rounded-full shadow-lg w-60 h-60 object-cover"
+        />
       </motion.div>
     </div>
   );
