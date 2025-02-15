@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback, useState } from "react";
 import { motion } from "framer-motion";
 import TextTransition, { presets } from "react-text-transition";
-import { Particles } from "react-particles";
+import { Particles } from "@tsparticles/react";
 import { loadSlim } from "tsparticles-slim";
 import Aos from "aos";
 import "aos/dist/aos.css";
@@ -20,7 +20,9 @@ const TITLES = [
 
 const Home = () => {
   useEffect(() => {
-    Aos.init({ duration: 1000 });
+    if (typeof window !== "undefined") {
+      Aos.init({ duration: 1000 });
+    }
   }, []);
 
   const [index, setIndex] = useState(0);
