@@ -91,9 +91,11 @@ const Home = () => {
           <span className="neon-glow">SHAN GABOL</span>
         </motion.p>
 
-        {/* Smooth Title Animation */}
+        {/* Smooth Title Animation (Fixed <div> inside <p> issue) */}
         <p className="text-2xl font-bold mt-3 text-white">
-          <TextTransition springConfig={presets.wobbly}>{TITLES[index]}</TextTransition>
+          <span>
+            <TextTransition springConfig={presets.wobbly}>{TITLES[index]}</TextTransition>
+          </span>
         </p>
       </motion.div>
 
@@ -104,6 +106,7 @@ const Home = () => {
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 1.2 }}
       >
+        <img src={image} alt="Profile" className="rounded-full shadow-lg w-60 h-60 object-cover" />
       </motion.div>
     </div>
   );
