@@ -35,8 +35,8 @@ function App() {
 
           {/* Desktop Menu */}
           <nav className="hidden md:flex gap-8">
-            {["Homekjhxck", "About","Facts", "Skills", "Resume","Projects", "Services", "Contact"].map(
-              (item) => (
+            {["Home", "About","Facts", "Skills", "Resume","Projects", "Services", "Contact"].map(
+              (item) =>(
                 <Link
                   key={item}
                   to={item.toLowerCase()}
