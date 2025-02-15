@@ -1,50 +1,89 @@
-import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
-import { GiCrossedBones } from "react-icons/gi";
+import { useState, useEffect } from "react";
+import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+import { Link } from "react-scroll"; // Smooth scrolling for menu items
+import { Main } from "./components/Molecules";
 import "./App.css";
-import { Main, Navbar } from "./components/Molecules";
-import { useState } from "react";
-import Home from "./components/Molecules/Home";
+
 
 function App() {
-  const [show, setShow] = useState(false);
-  const [navShow, setNavShow] = useState(false);
+  const [navOpen, setNavOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Detect scroll for adding shadow effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <div className="flex justify-end overflow-hidden relative">
-      <Navbar
-        className={`navbar w-72 h-screen flex-[0.2] fixed top-0 lg:left-0 left-[-300px] z-[9997] transition-all ease-in-out duration-500 flex justify-start flex-col items-center overflow-y-auto bg-[#040b14] rounded-md text-gray-100 font-['poppins','sans'] shadow-xl`}
-      />
-      <div className="flex lg:hidden justify-end absolute top-1 right-1 sm:top-3 sm:right-3">
-        <div className="w-9 h-9 flex justify-center items-center bg-[#149ddd] rounded-full fixed z-50">
-          {show ? (
-            <div>
-              <GiCrossedBones
-                className="w-4 h-4 z-50"
-                onClick={() => [
-                  setShow(!show),
-                  console.log("i was clicked by close", show),
-                ]}
-              />
-            </div>
-          ) : (
-            <AiOutlineMenu
-              onClick={() => [
-                setShow(!show),
-                console.log("i was clicked by close", show),
-              ]}
-              className="w-5 h-5 z-50"
-            />
+    <div className="relative overflow-hidden">
+      {/* ✅ HEADER NAVIGATION */}
+      <header
+        className={`fixed top-0 left-0 w-full text-white z-50 transition-all duration-300 ease-in-out ${
+          scrolled ? "shadow-lg bg-[#040b14] bg-opacity-95" : "bg-[#040b14] bg-opacity-80"
+        }`}
+      >
+        <div className="max-w-screen-xl mx-auto flex justify-between items-center px-6 py-4">
+          {/* Logo */}
+          <h1 className="text-2xl font-bold tracking-wide text-[#149ddd] hover:text-white transition duration-300">
+            Shan Gabol
+          </h1>
+
+          {/* Desktop Menu */}
+          <nav className="hidden md:flex gap-8">
+            {["Home", "About","Facts", "Skills", "Resume","Projects", "Services", "Contact"].map(
+              (item) => (
+                <Link
+                  key={item}
+                  to={item.toLowerCase()}
+                  smooth
+                  duration={500}
+                  className="hover:text-[#149ddd] transition-all duration-300 cursor-pointer relative group"
+                >
+                  {item}
+                  <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#149ddd] transition-all duration-300 group-hover:w-full"></span>
+                </Link>
+              )
+            )}
+          </nav>
+
+          {/* Mobile Menu Button */}
+          <button className="md:hidden text-2xl focus:outline-none" onClick={() => setNavOpen(!navOpen)}>
+            {navOpen ? <AiOutlineClose /> : <AiOutlineMenu />}
+          </button>
+        </div>
+
+        {/* Mobile Dropdown Menu */}
+        <div
+          className={`fixed top-0 left-0 w-full h-screen bg-[#040b14] text-white flex flex-col items-center justify-center transform ${
+            navOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
+          } transition-all duration-500 ease-in-out md:hidden`}
+        >
+          {["Home", "About", "Projects", "Facts", "Skills", "Resume", "Portfolio", "Services", "Contact"].map(
+            (item) => (
+              <Link
+                key={item}
+                to={item.toLowerCase()}
+                smooth
+                duration={500}
+                onClick={() => setNavOpen(false)}
+                className="text-xl my-3 hover:text-[#149ddd] transition-all duration-300 cursor-pointer"
+              >
+                {item}
+              </Link>
+            )
           )}
         </div>
-        <Navbar
-          id="header"
-          onClick={() => setShow(false)}
-          className={`w-72 h-screen z-[10]  transition-all ease-in-out duration-500 overflow-auto fixed top-0 ${
-            show ? "left-0" : "left-[-300px]"
-          } flex justify-start flex-col items-center rounded-md bg-[#040b14] text-gray-100 font-['poppins','sans']`}
-        />
-      </div>
-      <Main />
+      </header>
+
+      {/* Main Content */}
+      <main className="mt-20"> {/* Added margin-top to prevent overlap */}
+        <Main />
+      </main>
     </div>
   );
 }

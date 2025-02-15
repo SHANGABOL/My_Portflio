@@ -2,150 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-:root{
-  --primary-color1:#149ddd;
-}
-html{
-  scroll-behavior: smooth;
-}
-*{
-  margin: 0px;
-  padding: 0px;
-  box-sizing: border-box;
-}
-.Menu_after::after{
-  content: "";
-  width: 0px;
-  display: block;
-  height: 0px;
-  border: 0px solid var(--primary-color1)
-
-}
-.Menu_after:hover::after{
-  content: "";
-  transition: all;
-  transition-duration: 400ms;
-  width: 52px;
-  height: 2px;
-  background-color: var(--primary-color1);
-
-}
-.main{
-
+/* ✅ Apply Particle Background Only to #home */
+#home {
+  position: relative;
 }
 
-
-.to-left{
-
+/* ✅ Neon Glow Effect for Name */
+.neon-glow {
+  color: #149ddd;
+  text-shadow: 0px 0px 5px #149ddd, 0px 0px 10px #149ddd, 0px 0px 20px #149ddd;
+  animation: neon-flicker 1.5s infinite alternate;
 }
-@media (min-width:1260px) {
-  
-  .main .section {
-    margin-left: 20px;
+
+@keyframes neon-flicker {
+  0% {
+    opacity: 1;
   }
-}
-@media (min-width:1448px) {
-  .main{
-    margin-left: -35px;
+  100% {
+    opacity: 0.8;
   }
-  .main .section {
-    margin-left: 10px;
-  }
-}
-
-/*  */
-
-@media (min-width:1580px) {
-  .main{
-    margin-left: -45px;
-  }
- 
-}
-
-@media (min-width:1628px){
-  .main{
-    margin-left: -85px;
-  }
-}
-@media (min-width:1782px){
-  .main{
-    margin-left: -125px;
-  }
- 
-}
-
-.line-border::before{
-  content: "";
-  display: block;
-  width: 60px;
-  height: 3px;
-  background-color: var(--primary-color1);
-  position: absolute;
-  bottom: -15px;
-  left: 0px;
-
-}
-
-/* Skills */
-
- .progress {
-  height: 60px;
-  display: block;
-  background: none;
-  border-radius: 0;
-}
-
-.progress .skill {
-  padding: 0;
-  margin: 0 0 6px 0;
-  text-transform: uppercase;
-  display: block;
-  font-weight: 600;
-  font-family: "Poppins", sans-serif;
-  color: #050d18;
-}
-
-
-.progress .skill .val {
-  float: right;
-  font-style: normal;
-}
-
- .progress-bar-wrap {
-  background: #066cf0;
-  height: 10px;
-}
-.progress-bar {
-  width: 1px;
-  height: 10px;
-  transition: 0.9s;
-  background-color: #010609;
-}
-.circle{
-  
-}
-
- 
-.circle::before{
-  content: "";
-  background-color: #fff;
-  border: 2px solid #1f5297;
-  border-radius: 50px;
-  flex: none;
-  height: 18px;
-  left: -10px;
-  overflow: hidden;
-  position: absolute;
-  top: 0px;
-  width: 18px;
-  will-change: var(--framer-will-change-override, transform);
-}
-
-/* Home Component */
-.borderRadius{
-  border-radius: 56% 44% 33% 67% / 80% 73% 17% 10% ;
-  /* border: 4px dotted;  */
-  border-color:  conic-gradient(#ff0000 0%, #ffff00 16.67%, #00ff00 33.33%, #00ffff 50%, #0000ff 66.67%, #ff00ff 83.33%, #ff0000 100%);
-padding: 9px;
-box-sizing: border-box;
 }

@@ -1,57 +1,82 @@
-import React from "react";
-import LinearProgress from "@mui/material/LinearProgress";
-import { styled } from "@mui/material/styles";
-import { Box } from "@mui/material";
+import React, { useEffect } from "react";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+const skills = [
+  { category: "Front-End", name: "HTML", value: 100 },
+  { category: "Front-End", name: "CSS", value: 95 },
+  { category: "Front-End", name: "Tailwind CSS", value: 90 },
+  { category: "Front-End", name: "Bootstrap", value: 90 },
+  { category: "Front-End", name: "JavaScript", value: 90 },
+  { category: "Front-End", name: "TypeScript", value: 85 },
+  { category: "Front-End", name: "React.js", value: 90 },
+  { category: "Front-End", name: "Next.js", value: 85 },
+  { category: "Front-End", name: "Redux", value: 85 },
+  { category: "Front-End", name: "Angular", value: 85 },
+  { category: "Front-End", name: "RxJS", value: 80 },
+  { category: "Front-End", name: "NgRx", value: 75 },
+  { category: "Front-End", name: "PrimeNG", value: 80 },
+
+  { category: "Back-End", name: "Node.js", value: 85 },
+  { category: "Back-End", name: "Express.js", value: 80 },
+  { category: "Back-End", name: "MongoDB", value: 85 },
+  { category: "Back-End", name: "PostgreSQL", value: 75 },
+  { category: "Back-End", name: "Symfony", value: 70 },
+
+  { category: "Cloud & DevOps", name: "AWS & Cloud Services", value: 70 },
+  { category: "Cloud & DevOps", name: "Docker", value: 70 },
+];
+
+const groupedSkills = {
+  "Front-End": skills.filter((s) => s.category === "Front-End"),
+  "Back-End": skills.filter((s) => s.category === "Back-End"),
+  "Cloud & DevOps": skills.filter((s) => s.category === "Cloud & DevOps"),
+};
 
 const Skills = () => {
-  const BorderLinearProgress = styled(LinearProgress)({
-    height: 10,
-    borderRadius: 5,
-    overflow: "hidden",
-  });
-
-  const items = [
-    { name: "HTML", per: "100%", value: "100" },
-    { name: "CSS", per: "90%", value: "90" },
-    { name: "TAILWIND", per: "90%", value: "90" },
-    { name: "JAVASCRIPT", per: "75%", value: "75" },
-    { name: "BOOTSTRAP", per: "90%", value: "90" },
-    { name: "REACT", per: "90%", value: "90" },
-    { name: "REDUX", per: "90%", value: "90" },
-    { name: "NEXT", per: "80%", value: "80" },
-    { name: "Node Js", per: "80%", value: "80" },
-    { name: "Mongodb", per: "80%", value: "80" },
-  ];
+  useEffect(() => {
+    AOS.init({ duration: 1500 });
+  }, []);
 
   return (
-    <div
-      id="skills"
-      className={`h-auto w-full flex flex-col justify-start gap-8  py-16 px-4 sm:px-14 bg-indigo-100 `}
-    >
-      <div className="to-left">
-        <span className="line-border relative font-bold text-4xl text-[#173b6c]">
+    <div id="skills" className="h-auto w-full flex flex-col justify-start gap-10 py-16 px-6 sm:px-14 bg-indigo-100">
+      {/* Section Heading */}
+      <div className="text-center" data-aos="fade-up">
+        <h2 className="relative font-bold text-5xl text-[#173b6c] after:w-16 after:h-1 after:bg-[#149ddd] after:block after:mx-auto after:mt-3">
           Skills
-        </span>
-        <p className="mt-10 text-lg leading-8">
-          My passion shines through in every line of HTML, every style in CSS,
-          every interactive feature in JavaScript, and every dynamic solution
-          with ReactJS and Redux. I'm a maestro of Tailwind CSS and Bootstrap, Node js,and Mongodb
-          weaving innovation and aesthetics into every project.
+        </h2>
+        <p className="mt-6 text-lg leading-8 text-gray-700 max-w-3xl mx-auto">
+          I specialize in full-stack development, combining expertise in front-end, back-end, and cloud technologies to build scalable and high-performance applications.
         </p>
       </div>
-      <Box className="flex flex-col md:flex-row sm:mx-5 md:mx-0 gap-0 md:gap-5 text-gray-600">
-        <Box className="border w-full grid grid-cols-1 md:grid-cols-2 gap-5 pb-5 ">
-          {items.map((item) => (
-            <Box data-aos="fade-up">
-              <Box className="w-full flex justify-between text-sm my-1 font-bold">
-                <i>{item.name}</i>
-                <i>{item.per}</i>
-              </Box>
-              <BorderLinearProgress variant="determinate" value={item.value} />
-            </Box>
-          ))}
-        </Box>
-      </Box>
+
+      {/* Skill Categories */}
+      {Object.keys(groupedSkills).map((category) => (
+        <div key={category} className="mb-10">
+          <h3 className="text-3xl font-semibold text-[#173b6c] mb-5">{category}</h3>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+            {groupedSkills[category].map((skill, index) => (
+              <div key={index} className="flex flex-col items-center" data-aos="fade-up">
+                <div className="w-24 h-24">
+                  <CircularProgressbar
+                    value={skill.value}
+                    text={`${skill.value}%`}
+                    styles={buildStyles({
+                      textSize: "16px",
+                      pathColor: "#149ddd",
+                      textColor: "#173b6c",
+                      trailColor: "#e2e8f0",
+                    })}
+                  />
+                </div>
+                <p className="mt-3 text-lg font-semibold text-gray-800">{skill.name}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
     </div>
   );
 };

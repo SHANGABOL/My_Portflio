@@ -1,45 +1,39 @@
 import { MdOutlineDeveloperMode, MdOutlineSupportAgent } from "react-icons/md";
 import { DiResponsive } from "react-icons/di";
 import { BiCustomize, BiSignal5 } from "react-icons/bi";
-import { FaShopify } from "react-icons/fa";
-import { Details } from "@mui/icons-material";
+import { FaCloud, FaDatabase } from "react-icons/fa";
 
 const serviceDetails = [
   {
-    title: "Web Design and Development",
-    content: "Web Design and Development",
-    icon: MdOutlineDeveloperMode,
+    title: "Full-Stack Web Development",
+    content: "Building scalable and high-performance applications using React, Angular, Node.js, and MongoDB.",
+    icon: MdOutlineDeveloperMode, // ✅ Correctly imported component
   },
   {
-    title: "Responsive Solutions",
-    content:
-      "Ensure your website looks and performs flawlessly across all devices, delivering an exceptional user experience.",
+    title: "API Development & Integration",
+    content: "Developing secure RESTful APIs and integrating third-party services to enhance functionality.",
+    icon: FaDatabase, // ✅ Ensure icons are properly assigned
+  },
+  {
+    title: "Cloud & DevOps Solutions",
+    content: "Deploying and managing applications using AWS, Docker, and CI/CD pipelines.",
+    icon: FaCloud,
+  },
+  {
+    title: "UI/UX Optimization",
+    content: "Creating interactive and visually appealing user interfaces with Tailwind CSS, Bootstrap, and Material UI.",
     icon: DiResponsive,
   },
   {
     title: "Performance Optimization",
-    content:
-      "Fine-tune your web applications for speed and efficiency, enhancing user satisfaction and search engine ranking.",
+    content: "Enhancing application speed, responsiveness, and security through best coding practices.",
     icon: BiSignal5,
   },
   {
-    title: "E-commerce Solutions",
-    content:
-      "Launch and optimize online stores, boosting sales and customer engagement with cutting-edge e-commerce technologies.",
-    icon: FaShopify,
-  },
-  {
-    title: "Custom Development",
-    content:
-      "Tailor-made solutions to meet your unique business needs, from dynamic web applications to interactive user interfaces.",
+    title: "Custom Software Solutions",
+    content: "Building tailored software solutions to meet unique business needs.",
     icon: BiCustomize,
-  },
-  {
-    title: "Maintenance and Support",
-    content:
-      "Keep your web assets up-to-date and secure with our ongoing maintenance and support services.",
-    icon: MdOutlineSupportAgent,
   },
 ];
 
-export default serviceDetails;
+export default serviceDetails; // ✅ Ensure it's a default export

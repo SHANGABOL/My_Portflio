@@ -1,182 +1,129 @@
-import { Box } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
+import { motion } from "framer-motion";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Resume = () => {
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
+
+  const handleDownload = () => {
+    const cvUrl = "/ShanF_CV.pdf";
+    const link = document.createElement("a");
+    link.href = cvUrl;
+    link.download = "Shan_Gabol_CV.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
-    <div
-      id="resume"
-      className={`h-auto w-full flex flex-col justify-start gap-5 py-16 px-4 sm:px-14`}
-    >
-      <div className="">
-        <span className="line-border relative font-bold text-4xl text-[#173b6c]">
+    <div id="resume" className="h-auto w-full flex flex-col justify-start gap-10 py-16 px-6 sm:px-14 bg-gray-100">
+      {/* Resume Heading */}
+      <motion.div className="text-center" data-aos="fade-up">
+        <h2 className="relative font-bold text-5xl text-[#173b6c] after:w-16 after:h-1 after:bg-[#149ddd] after:block after:mx-auto after:mt-3">
           Resume
-        </span>
-        <p className="mt-10 text-lg leading-8">
-          With a strong foundation in web development and a passion for coding
-          excellence, I specialize in HTML, CSS, JavaScript, ReactJS, Redux,Node js,mongodb
-          Tailwind CSS, and Bootstrap. My commitment to delivering top-notch
-          solutions is evident in every project I undertake. Join me on a
-          journey through my professional experience, where innovation and
-          precision converge to create exceptional web experiences.
+        </h2>
+        <p className="mt-6 text-lg leading-8 text-gray-700 max-w-3xl mx-auto">
+          As a Full-Stack Software Engineer, I specialize in scalable web applications, cloud computing, and DevOps.  
+          With expertise in Angular, React, Redux, Node.js, Python, MongoDB, AWS, and Docker, I have contributed to innovative projects across industries.
         </p>
-      </div>
-      <section
-        data-aos="fade-top"
-        className="text-gray-700 body-font mt-2 gap-54 flex flex-col md:flex-row leading-7 "
-      >
-        <div className="w-full md:w-6/12 gap-4 px md:px-4  flex flex-row flex-wrap">
-          <Box className="">
-            <div className="mb-4">
-              <span className="font-bold text-2xl text-[#000]">Summary</span>
-            </div>
-            <Box className=" relative circle border-l-2 border-[#1f5297] pt-0 pl-5 pr-0 mb-4">
-              <h4 className="font-bold text-xl text-gray-800 pb-2 ">
-                Hassan Raza
-              </h4>
-              <p>
+
+        {/* Download CV Button */}
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={handleDownload}
+          className="mt-6 px-6 py-3 bg-[#173b6c] text-white font-semibold rounded-lg shadow-md hover:bg-[#0f2a4d] transition duration-300"
+        >
+          Download CV
+        </motion.button>
+      </motion.div>
+
+      {/* Resume Content */}
+      <section className="text-gray-700 body-font mt-8 flex flex-col md:flex-row leading-7">
+        {/* Left Section - Summary & Education */}
+        <motion.div className="w-full md:w-6/12 px-4 flex flex-col gap-8" data-aos="fade-right">
+          {/* Summary */}
+          <div>
+            <h3 className="font-bold text-3xl text-[#173b6c] mb-4">Summary</h3>
+            <div className="border-l-4 border-[#1f5297] pl-5">
+              <h4 className="font-bold text-xl text-gray-800 pb-2">Shan Gabol</h4>
+              <p className="text-gray-700">
                 <em>
-                  A seasoned Front End Web Developer with expertise in HTML,
-                  CSS, JavaScript, ReactJS, Redux, Tailwind CSS, and Bootstrap, Node js and mongodb.
-                  Committed to crafting exceptional web experiences through
-                  innovation and precision, driven by a passion for coding
-                  excellence.
+                  A Full-Stack Developer with 5+ years of experience in Angular, React, Redux, Node.js, Python, and MongoDB.  
+                  Passionate about building scalable applications that drive efficiency and innovation.
                 </em>
               </p>
-              <ul className="mt-2 ml-4">
-                <li className="list-item list-disc">
-                  6th Road, Rawalpindi, Pakistan
-                </li>
-                <li className="list-item list-disc font-semibold">
-                  (+92) 3047949332
-                </li>
-                <li className="list-item list-disc font-semibold">
-                  kkami5754049@gmail.com
-                </li>
+              <ul className="mt-3 text-gray-600">
+                <li>📍 Islamabad, Pakistan</li>
+                <li>📞 +92 300 7137798</li>
+                <li>📧 mshangabol@gmail.com</li>
               </ul>
-            </Box>
-            <Box className="">
-              <div className="mb-4">
-                <span className="font-bold text-2xl text-[#000]">
-                  Education
-                </span>
-              </div>
-              <Box className="relative circle border-l-2 border-[#1f5297] pt-0 pl-5 pb-5 pr-0 ">
-                <h4 className="font-bold text-xl pb-1 text-gray-800">
-                  HIGHER EDUCTAION & COLLEGE
-                </h4>
-                <h5 className="text-sm  inline-block py-1 px-3 font-bold mb-2 font-[cursive] bg-indigo-100">
-                  2015 - 2017
-                </h5>
-                <p className="text-sm font-semibold">
-                  <em>Govt degree College, Nowshera Cantt, KPK</em>
-                </p>
-                <p className="py-2 text-base leading-7">
-                  Completed Intermediate from Govt degree College, Nowshera
-                  Cantt, with a strong foundation in Pre_Engineering, ready to
-                  leverage my knowledge and skills in the tech industry. I am
-                  now prepared to apply this knowledge and skills in the tech
-                  industry.
-                </p>
-              </Box>
-              <Box className="relative circle border-l-2 border-[#1f5297] pt-0 pl-5 pb-5 pr-0 ">
-                <h4 className="font-bold text-xl pb-2 text-gray-800">
-                  BACHELOR OF COMPUTER SCIENCE
-                </h4>
-                <h5 className="text-sm  inline-block py-1 px-3 font-bold mb-2 font-[cursive] bg-indigo-100">
-                  2017 - 2021
-                </h5>
-                <p className="text-sm font-semibold">
-                  <em>Abdul Wali Khan University Mardan, Kpk, Pakistan</em>
-                </p>
-                <p className="py-2 text-base leading-7">
-                  Graduated with a Bachelor's in Computer Science from Abdul
-                  Wali Khan University Mardan , equipped with a robust
-                  foundation in software development and a passion for shaping
-                  innovative solutions in the ever-evolving tech landscape.
-                </p>
-              </Box>
-            </Box>
-          </Box>
-        </div>
-
-        {/*.............. new............. */}
-
-        <div className="w-full md:w-6/12 gap-4 px-2 md:px-4  flex flex-row flex-wrap">
-          <Box>
-            <div className="mb-4">
-              <span className="font-bold text-2xl text-[#000]">
-                Professional Experience
-              </span>
             </div>
-            <Box className="relative circle border-l-2 border-[#1f5297] pt-0 pl-5 pb-4 pr-0 ">
-              <h4 className="font-bold text-xl text-gray-800 pb-2 ">
-                FRONT END DEVELOPER
-              </h4>
-              <h5 className="text-sm border inline-block py-1 px-3 font-bold mb-2 font-[cursive] bg-indigo-100">
-                Sep, 2023 - Present
+          </div>
+
+          {/* Education */}
+          <div>
+            <h3 className="font-bold text-3xl text-[#173b6c] mb-4">Education</h3>
+            <div className="border-l-4 border-[#1f5297] pl-5">
+              <h4 className="font-bold text-xl text-gray-800">Bachelor of Information Technology</h4>
+              <h5 className="text-sm py-1 px-3 font-bold mb-2 bg-indigo-100 inline-block">
+                2017 - 2021
               </h5>
-              <p>
-                <em>Alright Tech, Rawalpindi, Pakistan</em>
+              <p className="text-gray-700">
+                <em>Arid Agriculture University, Rawalpindi, Pakistan</em>
               </p>
-              <ul className="mt-2 ml-4">
-                <li className="list-item list-disc">
-                  Develop and maintain responsive, user-friendly and functional
-                  web applications using HTML, CSS, JavaScript, Next.js,
-                  Tailwind CSS, Bootstrap, and Material UI.
-                </li>
-                <li className="list-item list-disc">
-                  Optimize frontend applications for maximum performance,
-                  responsiveness, and cross-browser compatibility.
-                </li>
-                <li className="list-item list-disc">
-                  Collaborate closely with cross-functional teams to gather
-                  requirements, understand business needs, and implement
-                  comprehensive frontend solutions.
-                </li>
-                <li className="list-item list-disc">
-                  Collaborate with UX/UI designers to translate wireframes and
-                  prototypes into visually appealing and user-friendly
-                  interfaces.
-                </li>
-              </ul>
-            </Box>
-          </Box>
-          <Box>
-            <Box className="relative circle border-l-2 border-[#1f5297] pt-0 pl-5 pb-5 pr-0 ">
-              <h4 className="font-bold text-xl pb-1 text-gray-800">
-                FRONT END WED DEVELOPER
-              </h4>
-              <h5 className="text-sm border inline-block py-1 px-3 font-bold mb-2 font-[cursive] bg-indigo-100">
-                25 Feb 2022 - 25 Aug 2022
+              <p className="py-2 leading-7">
+                Graduated with a Bachelor's in IT, focusing on software development, cloud computing, and full-stack technologies.
+              </p>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Right Section - Experience */}
+        <motion.div className="w-full md:w-6/12 px-4 flex flex-col gap-8" data-aos="fade-left">
+          {/* Experience - Algo3 */}
+          <div>
+            <h3 className="font-bold text-3xl text-[#173b6c] mb-4">Professional Experience</h3>
+            <div className="border-l-4 border-[#1f5297] pl-5">
+              <h4 className="font-bold text-xl text-gray-800 pb-2">Full-Stack Software Developer</h4>
+              <h5 className="text-sm py-1 px-3 font-bold mb-2 bg-indigo-100 inline-block">
+                Jan 2023 - Present
               </h5>
-              <p className="text-sm font-semibold">
-                <em>
-                  National Incubation Center, Kohat University of Science and
-                  Technology, Kohat, Pakistan
-                </em>
+              <p className="text-gray-700">
+                <em>Algo3, Islamabad, Pakistan</em>
               </p>
-              <ul className="mt-2 ml-4">
-                <li className="list-item list-disc">
-                  I contributed my expertise to the dynamic startup,
-                  Mushroolicious.
-                </li>
-                <li className="list-item list-disc">
-                  During my tenure from February 25 to August 25, 2022, I played
-                  a pivotal role in designing and developing the front-end of
-                  Mushroolicious' web presence.
-                </li>
-                <li className="list-item list-disc">
-                  This experience allowed me to showcase my skills in web
-                  development, user interface design, and collaborate with an
-                  innovative startup in a dynamic environment.
-                </li>
-                <li className="list-item list-disc">
-                  Created an eye catchy and mobile friendly responsive designs.
-                </li>
+              <ul className="mt-3 text-gray-600">
+                <li>💡 Built scalable web applications using Angular, React, Node.js, MongoDB.</li>
+                <li>🚀 Optimized applications for performance, security, and cloud deployment.</li>
+                <li>☁️ Integrated AWS services, Dockerized applications, and automated CI/CD pipelines.</li>
+                <li>🔄 Worked in agile teams, ensuring clean, maintainable, and scalable code.</li>
               </ul>
-            </Box>
-          </Box>
-        </div>
+            </div>
+          </div>
+
+          {/* Experience - Tecklogics */}
+          <div>
+            <div className="border-l-4 border-[#1f5297] pl-5">
+              <h4 className="font-bold text-xl text-gray-800">Full-Stack Developer</h4>
+              <h5 className="text-sm py-1 px-3 font-bold mb-2 bg-indigo-100 inline-block">
+                Jan 2020 - Dec 2022
+              </h5>
+              <p className="text-gray-700">
+                <em>Tecklogics (USA Client-Based), Islamabad, Pakistan</em>
+              </p>
+              <ul className="mt-3 text-gray-600">
+                <li>⚡ Developed dynamic, responsive applications using Angular, React, Redux.</li>
+                <li>🔗 Built RESTful APIs and backend services with Node.js and Express.js.</li>
+                <li>💾 Managed MongoDB and SQL databases for efficient data handling.</li>
+                <li>🔄 Implemented state management with RxJS, NgRx, and Redux.</li>
+                <li>☁️ Deployed applications on AWS and handled DevOps processes.</li>
+              </ul>
+            </div>
+          </div>
+        </motion.div>
       </section>
     </div>
   );
