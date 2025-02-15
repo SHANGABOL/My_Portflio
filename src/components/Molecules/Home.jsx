@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import TextTransition, { presets } from "react-text-transition";
 
 import bgImage from "../../assets/bg.svg";
-import image from "../../assets/SHAN PIC.jpeg";
 
 const TITLES = [
   "Software Engineer",
@@ -122,11 +121,6 @@ const Home = () => {
         transition={{ duration: 1.2 }}
         whileHover={{ scale: 1.05 }}
       >
-        <img
-          src={image}
-          alt="Profile"
-          className="rounded-full shadow-lg w-60 h-60 object-cover"
-        />
       </motion.div>
     </div>
   );
