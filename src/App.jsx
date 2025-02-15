@@ -35,7 +35,7 @@ function App() {
 
           {/* Desktop Menu */}
           <nav className="hidden md:flex gap-8">
-            {["Home", "About","Facts", "Skills", "Resume","Projects", "Services", "Contact"].map(
+            {["Homekjhxck", "About","Facts", "Skills", "Resume","Projects", "Services", "Contact"].map(
               (item) => (
                 <Link
                   key={item}
